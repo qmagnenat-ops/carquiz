@@ -31,13 +31,15 @@ function scoreVehicle(vehicle, answers) {
 }
 
 function getAutoScoutUrl(car) {
-  const slug = (value) => value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/&/g, "and")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+  const slug = (value) =>
+    value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .replace(/&/g, "and")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+
   const modelSlugs = {
     "RAV4": "rav-4",
     "Série 3": "serie-3",
@@ -49,7 +51,11 @@ function getAutoScoutUrl(car) {
     "Model 3": "model-3",
     "Model Y": "model-y"
   };
-  return `https://www.autoscout24.ch/fr/voitures/${slug(car.brand)}/${modelSlugs[car.model] || slug(car.model)}`;
+
+  const brand = slug(car.brand);
+  const model = modelSlugs[car.model] || slug(car.model);
+
+  return `https://www.autoscout24.ch/fr/voitures/${brand}/${model}`;
 }
 
 const fallbackImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='500' viewBox='0 0 900 500'%3E%3Crect width='900' height='500' fill='%23e8eee4'/%3E%3Cpath d='M170 315h560l-55-100H285l-115 100z' fill='%237aa361'/%3E%3Ccircle cx='285' cy='325' r='42' fill='%23283b2d'/%3E%3Ccircle cx='615' cy='325' r='42' fill='%23283b2d'/%3E%3Ctext x='450' y='120' text-anchor='middle' font-family='Arial' font-size='34' fill='%23334b38'%3EAutoMatch%3C/text%3E%3C/svg%3E";
