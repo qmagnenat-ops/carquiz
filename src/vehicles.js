@@ -64,13 +64,30 @@ const catalog = [
   ["Subaru", "Outback", "break", "hybrid", 49000, 169, 5, "sport", "AWD", 1]
 ];
 
-export const vehicles = catalog.map(([brand, model, bodyType, fuel, price, power, seats, usage, drivetrain, premium], index) => ({
-  id: `${brand}-${model}`.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-  brand, model, bodyType, fuel, price, power, seats, usage, drivetrain,
-  gearbox: "Automatique",
-  acceleration: Math.max(3.5, +(12 - power / 55).toFixed(1)),
-  consumption: fuel === "electric" ? `${(14 + (index % 5) * 1.5).toFixed(1)} kWh/100 km` : `${(4.5 + (index % 6) * 0.7).toFixed(1)} L/100 km`,
-  reliability: premium ? 0.82 : 0.88,
-  imageQuery: `${brand} ${model} car`,
-  strengths: ["Confort et polyvalence", "Technologies embarquées", "Bon rapport qualité-prix"]
-}));
+export const vehicles = catalog.map(
+  ([brand, model, bodyType, fuel, price, power, seats, usage, drivetrain, premium], index) => ({
+    id: `${brand}-${model}`.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    brand,
+    model,
+    bodyType,
+    fuel,
+    price,
+    power,
+    seats,
+    usage,
+    drivetrain,
+    gearbox: "Automatique",
+    acceleration: Math.max(3.5, +(12 - power / 55).toFixed(1)),
+    consumption:
+      fuel === "electric"
+        ? `${(14 + (index % 5) * 1.5).toFixed(1)} kWh/100 km`
+        : `${(4.5 + (index % 6) * 0.7).toFixed(1)} L/100 km`,
+    reliability: premium ? 0.82 : 0.88,
+    imageQuery: `${brand} ${model} car`,
+    strengths: [
+      "Confort et polyvalence",
+      "Technologies embarquées",
+      "Bon rapport qualité-prix"
+    ]
+  })
+);
